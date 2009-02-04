@@ -7,7 +7,7 @@ def overview(request):
     images = []
     image_objects = Exhibit.objects.all()
     for index in range(4):
-        images.append(random.choice(image_objects).image_file.url)
+        images.append(random.choice(image_objects).square_image_url())
     return render_to_response('gallery/index.html', locals())
     
 def exhibit(request, exhibit_index):

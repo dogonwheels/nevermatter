@@ -10,17 +10,27 @@ class Exhibit(models.Model):
     description = models.TextField()
     
     def square_image_filename(self):
-        return self.image_file.file.name.replace('.', '_square.jpg')
+        # This is duplicated, and subject to borkage if the filename contains '.'s!
+        return self.image_file.file.name.replace('.', '_square.')
+    
+    def square_image_url(self):
+        return self.image_file.url.replace('.', '_square.')
     
     def save(self, force_insert=False, force_update=False):
         super(Exhibit, self).save(force_insert, force_update)
         filename = self.image_file.file.name
         if not filename == '':
-            square_image = Image.open(filename)
+            original_image = Image.open(filename)
+            smallest_dimension = min(original_image.size)
+            offset = ((smallest_dimension - original_image.size[0]) / 2, 
+                      (smallest_dimension - original_image.size[1]) / 2)
+
+            square_image = Image.new(original_image.mode, (smallest_dimension, smallest_dimension))
+            square_image.paste(original_image, offset)
             
-            square_image.thumbnail((300, 300), Image.ANTIALIAS)
+            square_300_image = square_image.resize((300, 300), Image.ANTIALIAS)
             square_image_filename = self.square_image_filename()
-            square_image.save(square_image_filename)
+            square_300_image.save(square_image_filename)
         
     def delete(self):
         filename = self.square_image_filename()
