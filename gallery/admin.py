@@ -1,4 +1,4 @@
-from nevermatter.gallery.models import Image
+from nevermatter.gallery.models import Exhibit
 from django.contrib import admin
 
-admin.site.register(Image)
+admin.site.register(Exhibit)

@@ -1,17 +1,18 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^nevermatter/', include('nevermatter.foo.urls')),
-
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    #(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+    (r'^nevermatter/image/(?P<image_id>\d+)/$', 'nevermatter.gallery.views.exhibit'),
+    (r'^nevermatter/$', 'nevermatter.gallery.views.overview'),
     (r'^admin/(.*)', admin.site.root),
 )
+
+if settings.DEBUG :
+    urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/domcrayford/Documents/Dev/nevermatter/media', 'show_indexes':True}),
+    )
+    
