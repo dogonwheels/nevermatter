@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^nevermatter/image/(?P<image_id>\d+)/$', 'nevermatter.gallery.views.exhibit'),
+    (r'^nevermatter/exhibit/(?P<exhibit_id>\d+)/$', 'nevermatter.gallery.views.exhibit'),
     (r'^nevermatter/$', 'nevermatter.gallery.views.overview'),
     (r'^admin/(.*)', admin.site.root),
 )

@@ -1,6 +1,7 @@
 Never
-<img src='{{images.0}}'>
-<img src='{{images.1}}'>
-<img src='{{images.2}}'>
-<img src='{{images.3}}'>
+{% for image in images %}
+<a href='{% url nevermatter.gallery.views.exhibit image.id %}'>
+	<img src='{{image.square_image_url}}'/>
+</a>
+{% endfor %}
 matter.
