@@ -1,5 +1,18 @@
-Individual image page.
+<img src={{main_image.large_image_url}}>
 
-<img src={{main_image_url}}>
+{{ main_image.title }}
+{{ main_image.description }}
+
+{% for image in images %}
+
+{% ifequal image main_image %}
+<img border=10 src='{{image.small_image_url}}'/>
+{% else %}
+<a href='{% url nevermatter.gallery.views.exhibit image.id %}'>
+	<img src='{{image.small_image_url}}'/>
+</a>
+{% endifequal %}
+
+{% endfor %}
 
 <a href='{% url gallery.views.overview %}'>home</a>

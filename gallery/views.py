@@ -9,7 +9,7 @@ def overview(request):
     return render_to_response('gallery/index.html', locals())
     
 def exhibit(request, exhibit_id):
-    main_image_url = Exhibit.objects.get(id=exhibit_id).large_image_url
-    number_of_images = Exhibit.objects.count()
-        
+    main_image = Exhibit.objects.get(id=exhibit_id)
+    images = Exhibit.objects.all()
+    
     return render_to_response('gallery/image.html', locals())
