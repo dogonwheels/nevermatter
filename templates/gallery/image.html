@@ -1,18 +1,43 @@
-<img src={{main_image.large_image_url}}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
 
-{{ main_image.title }}
-{{ main_image.description }}
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css"> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base-min.css">
+	<title>never matter - {{ main_image.title }}</title>
+</head>
+<body>
+	<div id="doc" class="yui-t7"> 
+		<div id="hd"><h1>Never Matter</h1></div> 
+		<div id="bd"> 
+			<div class="yui-gc"> 
+				<div class="yui-u first"> 
+					<img src={{main_image.large_image_url}}>
+				</div> 
+				<div class="yui-u"> 
+					<h1>{{ main_image.title }}</h1>
+					<p>{{ main_image.description }}</p>
+				</div> 
+			</div> 
+			<div class="yui-g"> 
+				{% for image in images %}
 
-{% for image in images %}
+				{% ifequal image main_image %}
+				<img border=10 src='{{image.small_image_url}}'/>
+				{% else %}
+				<a href='{% url nevermatter.gallery.views.exhibit image.id %}'>
+					<img src='{{image.small_image_url}}'/>
+				</a>
+				{% endifequal %}
 
-{% ifequal image main_image %}
-<img border=10 src='{{image.small_image_url}}'/>
-{% else %}
-<a href='{% url nevermatter.gallery.views.exhibit image.id %}'>
-	<img src='{{image.small_image_url}}'/>
-</a>
-{% endifequal %}
-
-{% endfor %}
-
-<a href='{% url gallery.views.overview %}'>home</a>
+				{% endfor %}
+			</div> 
+		</div> 
+		<div id="ft">
+			<a href='{% url gallery.views.overview %}'>home</a>
+		</div> 
+	</div>
+</body>
+</html>
