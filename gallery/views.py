@@ -13,3 +13,6 @@ def exhibit(request, exhibit_id):
     images = Exhibit.objects.all()
     
     return render_to_response('gallery/image.html', locals())
+    
+def contact(request):
+    return render_to_response('gallery/contact.html', locals())
