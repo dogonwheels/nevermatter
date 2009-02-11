@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'nevermatter.urls'
 
 TEMPLATE_DIRS = (
-    '/home/domcrayford/django_projects/myproject/templates',
+    '/home/domcrayford/django_projects/nevermatter/templates',
 )
 
 INSTALLED_APPS = (
