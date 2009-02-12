@@ -6,6 +6,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css"> 
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/base/base-min.css">
+	<link rel="stylesheet" type="text/css"
+	 href="/static/css/nevermatter.css">
 	<title>never matter - {{ main_image.title }}</title>
 </head>
 <body>
@@ -16,7 +18,7 @@
 		<div id="bd"> 
 			<div class="yui-gc"> 
 				<div class="yui-u first"> 
-					<img src={{main_image.large_image_url}}>
+					<img class='exhibit' src={{main_image.large_image_url}}>
 				</div> 
 				<div class="yui-u"> 
 					<h1>{{ main_image.title }}</h1>
@@ -24,10 +26,11 @@
 				</div> 
 			</div> 
 			<div class="yui-g"> 
+				<div class="filmstrip">
 				{% for image in images %}
 
 				{% ifequal image main_image %}
-				<img border=10 src='{{image.small_image_url}}'/>
+				<img class='selected' src='{{image.small_image_url}}'/>
 				{% else %}
 				<a href='{% url nevermatter.gallery.views.exhibit image.id %}'>
 					<img src='{{image.small_image_url}}'/>
@@ -35,6 +38,7 @@
 				{% endifequal %}
 
 				{% endfor %}
+				</div>
 			</div> 
 		</div> 
 		<div id="ft">
